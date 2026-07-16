@@ -56,6 +56,16 @@ Question: Three radically different sales-page designs, switchable via ?variant=
     .a #a-cap h2{max-width:none;white-space:nowrap;font-size:clamp(30px,4.2vw,58px);letter-spacing:-.06em;line-height:1.1}
     @media(max-width:600px){.a #a-cap h2{white-space:normal;font-size:32px}}
   </style>
+  <style>
+    .a .pricecard.hot{overflow:hidden;isolation:isolate;background:radial-gradient(90% 80% at 0% 0%,rgba(255,73,126,.16),transparent 62%),radial-gradient(100% 82% at 100% 0%,rgba(128,88,232,.15),transparent 64%),radial-gradient(120% 90% at 50% 100%,rgba(82,150,255,.12),transparent 64%),linear-gradient(135deg,#fff 0%,#fff5f8 34%,#f8f4ff 68%,#f1f3ff 100%);background-size:150% 150%;animation:price-laser-background 9s ease-in-out infinite}
+    .a .pricecard.hot::before{content:"";position:absolute;inset:-28%;z-index:0;pointer-events:none;background:linear-gradient(112deg,transparent 28%,rgba(255,73,126,.14) 45%,rgba(255,255,255,.7) 51%,rgba(128,88,232,.13) 62%,transparent 78%);filter:blur(14px);mix-blend-mode:screen;opacity:.62;transform:translate3d(-30%,18%,0) rotate(-10deg);animation:price-laser-sweep 6.8s ease-in-out infinite}
+    .a .pricecard.hot>*{z-index:1}
+    .a .pricecard.hot .price-icon{position:absolute;z-index:2}
+    .a .pricecard.hot:hover::before{opacity:1;animation-duration:3.2s}
+    @keyframes price-laser-sweep{0%,100%{transform:translate3d(-30%,18%,0) rotate(-10deg)}50%{transform:translate3d(30%,-8%,0) rotate(-10deg)}}
+    @keyframes price-laser-background{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+    @media(prefers-reduced-motion:reduce){.a .pricecard.hot{animation:none;background-position:50% 50%}.a .pricecard.hot::before{animation:none;opacity:.34;transform:translate3d(0,10%,0) rotate(-10deg)}}
+  </style>
 </head>
 <body>
   <div class="proto-note">文案预览 · 选择你的进入方式</div>
