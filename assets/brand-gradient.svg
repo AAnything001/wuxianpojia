@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="无限破甲">
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff303d"/>
+      <stop offset=".52" stop-color="#ef4778"/>
+      <stop offset="1" stop-color="#8058e8"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 5 53 17v30L32 59 11 47V17Z" fill="url(#g)" opacity=".14"/>
+  <path d="M32 5 53 17v30L32 59 11 47V17Z" fill="none" stroke="url(#g)" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="12" fill="url(#g)"/>
+  <path d="m35 20-12 14h8l-2 10 12-15h-8Z" fill="#fff" stroke="#fff" stroke-linejoin="round"/>
+</svg>
