@@ -8,6 +8,25 @@ Question: Three radically different sales-page designs, switchable via ?variant=
   <title>无限破甲｜让 AI 知道下一步怎么查</title>
   <link rel="icon" type="image/svg+xml" href="assets/brand-gradient.svg">
   <style>
+    .a .hero h1{font-size:clamp(36px,3.6vw,52px)}
+    @media(min-width:901px){
+      .a .client-ribbon .client-pill:nth-of-type(1){left:34%}
+      .a .client-ribbon .client-pill:nth-of-type(2){left:50%}
+      .a .client-ribbon .client-pill:nth-of-type(3){left:64%}
+      .a .client-ribbon .client-pill:nth-of-type(4){right:0}
+      .a .client-ribbon .client-pill:nth-of-type(5){right:20%}
+      .a .client-ribbon .client-pill:nth-of-type(6){right:-8%}
+    }
+    @media(max-width:600px){.a h1{font-size:28px}}
+  </style>
+  <style>
+    @media(min-width:901px){
+      .a .hero{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:start}
+      .a .hero>div:first-child{min-width:0;align-self:start}
+      .a .product-visual{min-width:560px;height:430px;align-self:start;justify-self:end}
+    }
+  </style>
+  <style>
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;overflow-x:hidden;font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}button{font:inherit}.variant{display:none;min-height:100vh}.variant.active{display:block}.switcher{position:fixed;z-index:9999;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(10,10,16,.92);box-shadow:0 16px 50px rgba(0,0,0,.4);backdrop-filter:blur(18px);color:#fff}.switcher button{width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:#0a0a10;cursor:pointer;font-weight:900}.switcher strong{min-width:190px;text-align:center;font-size:13px}.proto-note{position:fixed;z-index:9998;right:16px;top:16px;padding:7px 10px;border-radius:999px;background:#000;color:#fff;font-size:11px;opacity:.65}
 
     /* A — Cinematic */
@@ -68,6 +87,11 @@ Question: Three radically different sales-page designs, switchable via ?variant=
     @keyframes price-laser-sweep{0%,100%{transform:translate3d(-30%,18%,0) rotate(-10deg)}50%{transform:translate3d(30%,-8%,0) rotate(-10deg)}}
     @keyframes price-laser-background{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
     @media(prefers-reduced-motion:reduce){.a .pricecard.hot{animation:none;background-position:50% 50%}.a .pricecard.hot::before{animation:none;opacity:.34;transform:translate3d(0,10%,0) rotate(-10deg)}}
+  </style>
+  <style>
+    .a .hero h1{font-size:clamp(36px,3.6vw,52px)!important}
+    @media(max-width:600px){.a .hero h1{font-size:28px!important}}
+    @media(min-width:601px){.a .hero .lead:not(.em){margin-bottom:80px}.a .hero .em{margin-bottom:0}.a .hero .cta-row{margin-top:60px}}
   </style>
 </head>
 <body>
@@ -146,6 +170,12 @@ Question: Three radically different sales-page designs, switchable via ?variant=
     heroA?.addEventListener('pointermove',event=>{lastPointer=event;heroA.classList.add('is-hovering');if(!pointerFrame)pointerFrame=requestAnimationFrame(updatePointer)});
     heroA?.addEventListener('pointerleave',()=>{heroA.classList.remove('is-hovering');heroA.style.setProperty('--tilt-x','0deg');heroA.style.setProperty('--tilt-y','-3deg');heroA.style.setProperty('--card-x','0px');heroA.style.setProperty('--card-y','0px')});
     const updateLogTemplate=document.createElement('template');updateLogTemplate.innerHTML='<section class="update-log" id="a-updates" aria-labelledby="a-updates-title"><div class="update-log-head"><div><p class="eyebrow">持续更新</p><h2 id="a-updates-title">更新日志</h2></div><p class="update-log-lead">每次版本变化都留下记录，方便你了解新增能力与使用体验。</p></div><div class="update-log-list"><article class="update-log-item"><time class="update-log-date" datetime="2026-07-06">2026.07.6</time><div><h3>优化首页视觉与交互</h3><p>正式支持 Codex 5.5 / 5.6。</p></div></article><article class="update-log-item"><time class="update-log-date" datetime="2026-05-18">2026.05.18</time><div><h3>修复了在 Win11 上显示 BUG</h3><p>优化 Windows 11 环境下的页面显示兼容性。</p></div></article></div></section>';const updateLog=updateLogTemplate.content.firstElementChild;const updateNav=document.createElement('a');updateNav.href='#a-updates';updateNav.textContent='查看更新';variantA?.querySelector('.navlinks')?.insertBefore(updateNav,variantA.querySelector('.navcta'));variantA?.querySelector('footer')?.before(updateLog);
+    variantA?.querySelector('.hero .lead:not(.em)')?.replaceChildren(document.createTextNode('支持 Codex、Claude、Kiro 等主流 AI 客户端。'));
+    variantA?.querySelector('.hero .lead.em')?.replaceChildren(document.createTextNode('冲破模型限制壁垒，无限破甲，让AI真正成为你的辅助'));
+    const heroLead=variantA?.querySelector('.hero .lead:not(.em)');const heroEm=variantA?.querySelector('.hero .lead.em');const heroCta=variantA?.querySelector('.hero .cta-row');heroEm?.after(heroLead);heroCta?.before(heroLead);
+    const firstPainCard=variantA?.querySelector('.section .grid4 .card');firstPainCard?.querySelector('h3')?.replaceChildren(document.createTextNode('安全审查在拦你'));firstPainCard?.querySelector('p')?.replaceChildren(document.createTextNode('对话直接被中断'));
+    document.querySelector('[data-variant="A"] .title-line')?.replaceChildren(document.createTextNode('让AI，永远对你的需求说“好的”。'));
+    document.querySelector('[data-variant="A"] .title-accent')?.replaceChildren(document.createTextNode('不再拒绝、阻断、停止回复'));
     render();
   </script>
 <script>document.querySelector('#a-updates .update-log-item h3').textContent='新增支持Codex5.6';</script>
