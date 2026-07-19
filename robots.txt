@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /output/
+Sitemap: https://codexpojia.com/sitemap.xml
