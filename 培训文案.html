@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="无限破甲入门培训：认识软件逆向，了解工具和一套可重复的分析方法。">
-  <title>无限破甲｜软件逆向入门培训</title>
+  <meta name="description" content="软件逆向入门：用最简单的话，学会观察程序、提出问题和整理证据。">
+  <title>逆向知道的一切都在这里</title>
   <link rel="icon" type="image/svg+xml" href="assets/brand-gradient.svg">
   <style>
     :root{--ink:#171a23;--muted:#6e7585;--line:#e4e7ee;--panel:rgba(255,255,255,.78);--red:#ff3b4d;--violet:#8058e8;--blue:#4e8df7;--shadow:0 24px 70px rgba(49,58,82,.11)}
@@ -15,7 +15,6 @@
     .course-shell{display:grid;grid-template-columns:270px minmax(0,1fr);gap:18px;margin-top:30px}.course-nav{position:sticky;top:94px;align-self:start;padding:18px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.72);box-shadow:0 14px 40px rgba(37,45,68,.07)}.course-nav-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:14px}.course-nav-head strong{font-size:16px}.course-nav-head span{color:var(--violet);font-size:11px;font-weight:900}.course-progress{height:5px;margin:0 0 17px;overflow:hidden;border-radius:99px;background:#eceef4}.course-progress i{display:block;width:16.66%;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--violet));transition:width .25s ease}.course-list{display:grid;gap:7px}.course-tab{display:grid;grid-template-columns:31px 1fr;gap:10px;width:100%;padding:11px 10px;border:1px solid transparent;border-radius:12px;background:transparent;color:#6b7281;text-align:left;cursor:pointer}.course-tab b{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#f1f0fa;color:#795bd6;font-size:11px}.course-tab span{display:block;font-size:13px;font-weight:800;line-height:1.25}.course-tab small{display:block;margin-top:2px;color:#9aa0ad;font-size:10px}.course-tab:hover,.course-tab.is-active{border-color:#e0dafa;background:#faf9ff;color:#252936}.course-tab.is-active b{background:linear-gradient(135deg,var(--red),var(--violet));color:#fff}.course-doc{min-height:500px;padding:31px 34px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.86);box-shadow:var(--shadow)}.course-doc-meta{display:flex;align-items:center;gap:10px;color:#7b5cdb;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.course-doc-meta i{width:7px;height:7px;border-radius:50%;background:var(--red)}.course-doc h3{margin:13px 0 12px;font-size:clamp(28px,4vw,44px);line-height:1.12;letter-spacing:-.045em}.course-doc-lead{max-width:700px;margin:0;color:#626b7c;font-size:16px}.course-points{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:27px 0}.course-point{padding:16px 17px;border-radius:15px;background:#f7f7fb;border:1px solid #e9eaf2}.course-point strong{display:block;margin-bottom:5px;font-size:14px}.course-point p{margin:0;color:#70798a;font-size:13px;line-height:1.7}.course-note{margin-top:25px;padding:16px 18px;border-left:3px solid var(--violet);border-radius:0 13px 13px 0;background:#f5f2ff;color:#5b5571;font-size:13px}.course-nav-actions{display:flex;justify-content:space-between;gap:10px;margin-top:31px;padding-top:21px;border-top:1px solid var(--line)}.course-nav-actions button{padding:10px 14px;border:1px solid #dfe2eb;border-radius:11px;background:#fff;color:#5f6879;font-size:12px;font-weight:800;cursor:pointer}.course-nav-actions button:hover{border-color:#beaef3;color:#7658d4}.course-nav-actions button:disabled{opacity:.35;cursor:default}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{padding:25px;border:1px solid rgba(218,223,234,.9);border-radius:20px;background:var(--panel);box-shadow:0 10px 35px rgba(37,45,68,.05)}.card .num{display:grid;place-items:center;width:34px;height:34px;margin-bottom:16px;border-radius:11px;background:#f0edfb;color:var(--violet);font-size:13px;font-weight:950}.card h3{margin:0 0 7px;font-size:19px}.card p{margin:0;color:var(--muted);font-size:14px}
     .workflow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:34px}.step{position:relative;padding:18px 15px 20px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.78)}.step:not(:last-child):after{content:"→";position:absolute;right:-13px;top:50%;z-index:2;color:#a0a7b7;font-weight:900}.step small{display:block;color:var(--violet);font-size:10px;font-weight:900;letter-spacing:.12em}.step h3{margin:10px 0 4px;font-size:15px;line-height:1.35}.step p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
-    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.84);box-shadow:var(--shadow)}table{width:100%;min-width:850px;border-collapse:collapse;font-size:13px}th,td{padding:17px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{color:#626a7a;background:#fafbfe;font-size:11px;letter-spacing:.08em}tr:last-child td{border-bottom:0}td:first-child{color:#252a37;font-weight:850;white-space:nowrap}td:nth-child(2){color:var(--muted);min-width:280px}.cmd{display:flex;align-items:flex-start;gap:8px}.cmd code{display:block;max-width:340px;padding:8px 9px;border-radius:9px;background:#f2f3f7;color:#4d5670;font:11px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;word-break:break-word}.copy{flex:0 0 auto;padding:7px 9px;border:1px solid #dfe3ed;border-radius:8px;background:#fff;color:#6b7383;font-size:11px;cursor:pointer}.source{display:inline-block;margin-top:8px;color:#7658dc;font-size:11px}.source:hover{text-decoration:underline}
     .practice{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.practice .card{min-height:152px}.practice strong{display:block;margin-bottom:6px;font-size:17px}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}.check{padding:13px 15px;border-radius:13px;background:#fff;border:1px solid var(--line);color:#606a7c;font-size:13px}.check b{display:inline-grid;place-items:center;width:21px;height:21px;margin-right:8px;border-radius:50%;background:#eaf7ef;color:#31915b;font-size:12px}.cta{margin:58px 0 90px;padding:55px 32px;border-radius:28px;text-align:center;color:#fff;background:linear-gradient(130deg,#181b25,#30244e 58%,#7d3d79);box-shadow:0 28px 78px rgba(36,28,62,.22)}.cta h2{margin:7px 0 11px;font-size:clamp(30px,4vw,48px);letter-spacing:-.05em}.cta p{max-width:600px;margin:0 auto;color:#d6d7e1;font-size:14px}.cta .primary{margin-top:24px;background:#fff;color:#202431;box-shadow:none}.footer{padding:28px 0 42px;border-top:1px solid var(--line);color:#858c9a;font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:20px}.footer strong{color:#5a6272}
     @media(max-width:940px){.hero{grid-template-columns:1fr;gap:30px;padding-top:70px}.hero-card{max-width:680px}.course-shell{grid-template-columns:1fr}.course-nav{position:relative;top:auto}.workflow{grid-template-columns:repeat(3,1fr)}.step:nth-child(3):after{display:none}.cards{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.wrap{width:min(100% - 24px,560px)}.topline{font-size:10px}.nav{top:8px;padding:12px 13px 12px 15px;border-radius:16px}.navlinks a:not(.back){display:none}.hero{padding:57px 0 35px}.hero h1{font-size:43px;letter-spacing:-.05em}.hero .lead{font-size:15px;line-height:1.8}.hero-actions>*{width:100%}.section{padding:54px 0}.course-nav{padding:14px 12px;overflow:hidden}.course-list{display:flex;gap:7px;overflow-x:auto;padding-bottom:3px}.course-tab{min-width:142px;grid-template-columns:25px 1fr;padding:9px 8px}.course-tab b{width:23px;height:23px}.course-tab span{font-size:12px}.course-tab small{font-size:9px}.course-doc{min-height:0;padding:24px 20px;border-radius:20px}.course-doc h3{font-size:32px}.course-doc-lead{font-size:15px}.course-points{grid-template-columns:1fr;margin-top:22px}.course-nav-actions{margin-top:25px}.cards,.practice,.checklist{grid-template-columns:1fr}.workflow{grid-template-columns:1fr 1fr;gap:9px}.step:not(:last-child):after{display:none}.step{padding:14px}.step h3{font-size:14px}.section h2{font-size:35px}.cta{margin:38px 0 55px;padding:42px 22px}.footer-row{display:block}.footer-row span{display:block;margin-top:8px}}
@@ -26,7 +25,7 @@
   <header class="nav wrap">
     <a class="brand" href="index.html"><img src="assets/brand-gradient.svg" alt="无限破甲"><span>无限破甲</span></a>
     <nav class="navlinks" aria-label="页面导航">
-      <a href="#course">学习路径</a><a href="#skills">工具资料</a><a href="#practice">练习</a><a class="back" href="index.html">返回首页</a>
+      <a href="#course">学习路径</a><a href="#workflow">学习方法</a><a href="#practice">练习</a><a class="back" href="index.html">返回首页</a>
     </nav>
   </header>
 
@@ -34,25 +33,25 @@
     <section class="hero" id="top">
       <div>
         <p class="eyebrow">无限破甲 · 入门培训</p>
-        <h1>逆向知道的一切<br><span class="gradient">都在这里</span></h1>
-        <p class="lead">这页不讲玄学，也不要求你一开始就记住一堆工具名。我们先把两个问题说清楚：无限破甲是什么，软件逆向到底在做什么。</p>
-        <div class="hero-actions"><a class="primary" href="#concept">先认识无限破甲 ↓</a><a class="ghost" href="#workflow">查看学习流程</a></div>
-        <div class="chips"><span class="chip">APK / Android</span><span class="chip">Windows EXE / DLL</span><span class="chip">Web / 协议</span><span class="chip">CTF / 研究</span></div>
+        <h1>逆向知道的一切<br><span class="gradient">从看懂一个文件开始</span></h1>
+        <p class="lead">软件逆向，就是把程序拆开观察，弄清它做了什么。这里从最简单的一步开始，不要求你先会工具。</p>
+        <div class="hero-actions"><a class="primary" href="#course">开始学习逆向 ↓</a><a class="ghost" href="#cta">了解无限破甲如何辅助分析</a></div>
+        <div class="chips"><span class="chip">APK</span><span class="chip">Windows EXE</span><span class="chip">网页请求</span><span class="chip">未知文件</span></div>
       </div>
-      <div class="hero-card"><div class="terminal"><div><strong>user@wujin</strong>:~$ wujin start</div><div><span>→</span> 选择一个需要看懂的文件</div><div><span>→</span> 记录现象，再提出第一个问题</div><div><span>→</span> 从静态分析走到验证<span>_</span></div></div></div>
+      <div class="hero-card"><div class="terminal"><div><strong>reverse-study</strong>:~$ start</div><div><span>→</span> 选一个你想看懂的文件</div><div><span>→</span> 记录现象，再提出第一个问题</div><div><span>→</span> 先看线索，再做确认<span>_</span></div></div></div>
     </section>
 
     <section class="section" id="course">
-      <div class="section-head"><p class="eyebrow">学习路径 · 6 章</p><h2>像看一本小书一样，学会第一次逆向</h2><p class="section-lead">不用一次看完。左边选一章，右边只读当前内容；看完一章，再继续下一章。</p></div>
+      <div class="section-head"><p class="eyebrow">学习路径 · 7 章</p><h2>像看一本小书一样，学会第一次逆向</h2><p class="section-lead">不用一次看完。左边选一章，右边只读当前内容；看完一章，再继续下一章。</p></div>
       <div class="course-shell">
         <aside class="course-nav" aria-label="课程目录">
-          <div class="course-nav-head"><strong>课程目录</strong><span id="course-count">第 1 / 6 章</span></div>
+          <div class="course-nav-head"><strong>课程目录</strong><span id="course-count">第 1 / 7 章</span></div>
           <div class="course-progress" aria-hidden="true"><i id="course-progress"></i></div>
           <div class="course-list" id="course-list"></div>
         </aside>
         <article class="course-doc" aria-live="polite">
-          <div class="course-doc-meta"><i></i><span id="course-kicker">第 1 章 · 认识工具</span></div>
-          <h3 id="course-title">无限破甲是什么？</h3>
+          <div class="course-doc-meta"><i></i><span id="course-kicker">第 1 章 · 先弄懂这件事</span></div>
+          <h3 id="course-title">软件逆向到底是什么？</h3>
           <p class="course-doc-lead" id="course-lead"></p>
           <div class="course-points" id="course-points"></div>
           <div class="course-note" id="course-note"></div>
@@ -62,58 +61,44 @@
     </section>
 
     <section class="section" id="concept">
-      <div class="section-head"><p class="eyebrow">01 · 先建立共同语言</p><h2>先弄懂无限破甲，再谈怎么用</h2><p class="section-lead">软件逆向刚入门时，最容易卡在“我应该先看什么”。无限破甲把资料、工具和分析步骤放在同一条线上，方便你从一个具体问题开始。</p></div>
+      <div class="section-head"><p class="eyebrow">01 · 先建立共同语言</p><h2>逆向不是猜答案，是找证据</h2><p class="section-lead">你不必认识所有工具。只要先看见一个现象，再用证据确认它为什么发生，就已经在做逆向。</p></div>
       <div class="cards">
-        <article class="card"><div class="num">A</div><h3>无限破甲是什么？</h3><p>它是一套面向软件分析和逆向学习的工作台。你可以在这里找到常用工具、Skills、资料和一套能反复使用的分析方法。</p></article>
-        <article class="card"><div class="num">B</div><h3>软件逆向是什么？</h3><p>把已经编译好的程序拆开来看：它读取了什么、调用了什么、数据怎么流动，再用证据拼出程序真正做的事情。</p></article>
-        <article class="card"><div class="num">C</div><h3>谁适合从这里开始？</h3><p>想学 APK、EXE、接口或 CTF 的初学者，想快速定位问题的开发者，以及需要整理分析过程的安全研究人员。</p></article>
+        <article class="card"><div class="num">A</div><h3>你在研究什么？</h3><p>一个 APK、一个 EXE，或浏览器里的一次请求，都是可以观察的对象。先弄清它是什么，再问它做了什么。</p></article>
+        <article class="card"><div class="num">B</div><h3>逆向在做什么？</h3><p>看程序读了什么、写了什么、和谁通信，再把这些线索连成一段能复查的解释。</p></article>
+        <article class="card"><div class="num">C</div><h3>第一步是什么？</h3><p>写下一句普通话：我看到了什么，我想确认什么。先有问题，才知道接下来该看哪里。</p></article>
       </div>
     </section>
 
     <section class="section" id="workflow">
-      <div class="section-head"><p class="eyebrow">02 · 从入口到证据</p><h2>软件逆向，先看再猜</h2><p class="section-lead">逆向不是凭感觉猜答案。先观察，再验证；每一步都留下输入、输出和证据，卡住时就回到最近一次看得见的结果。</p></div>
+      <div class="section-head"><p class="eyebrow">02 · 从看到结论</p><h2>软件逆向，先看再猜</h2><p class="section-lead">逆向不是凭感觉猜答案。先观察，再验证；每一步都留下你做了什么、看到了什么，卡住时就回到最近一次看得见的结果。</p></div>
       <div class="workflow">
         <article class="step"><small>STEP 01</small><h3>说清目标</h3><p>你想知道程序的哪一部分</p></article>
-        <article class="step"><small>STEP 02</small><h3>准备样本</h3><p>确认文件来源、类型和版本</p></article>
-        <article class="step"><small>STEP 03</small><h3>静态观察</h3><p>看字符串、入口、依赖和资源</p></article>
-        <article class="step"><small>STEP 04</small><h3>动态验证</h3><p>运行程序，观察输入和输出</p></article>
-        <article class="step"><small>STEP 05</small><h3>留下证据</h3><p>保存日志、调用链和关键位置</p></article>
+        <article class="step"><small>STEP 02</small><h3>记下基本信息</h3><p>确认文件来源、类型和版本</p></article>
+        <article class="step"><small>STEP 03</small><h3>先看线索</h3><p>看文字、提示、资源和基本信息</p></article>
+        <article class="step"><small>STEP 04</small><h3>做一个小确认</h3><p>只做一个动作，观察前后变化</p></article>
+        <article class="step"><small>STEP 05</small><h3>留下证据</h3><p>保存时间、步骤和看到的结果</p></article>
         <article class="step"><small>STEP 06</small><h3>写出结论</h3><p>说明已知、未知和下一步</p></article>
       </div>
     </section>
 
-    <section class="section" id="skills">
-      <div class="section-head"><p class="eyebrow">03 · 学习资料地图</p><h2>按目标类型，找到下一件工具</h2><p class="section-lead">工具不是越多越好。先确定你在看 Android、Windows 还是 Web，再从对应的资料开始。下面保留了用途、安装方式和来源，方便继续学习。</p></div>
-      <div class="table-wrap"><table><thead><tr><th>分类 / Skill</th><th>用途</th><th>安装方式</th><th>来源</th></tr></thead><tbody>
-        <tr><td>通用 · reverse-engineering-tools</td><td>覆盖游戏安全、调试器、反编译器、内存分析、Frida、IDA、Ghidra 等通用逆向工具。</td><td><div class="cmd"><code>npx skills add https://github.com/gmh5225/awesome-game-security --skill reverse-engineering-tools</code><button class="copy" data-copy="npx skills add https://github.com/gmh5225/awesome-game-security --skill reverse-engineering-tools">复制</button></div></td><td><a class="source" href="https://github.com/gmh5225/awesome-game-security" target="_blank" rel="noopener">awesome-game-security ↗</a></td></tr>
-        <tr><td>Android · android-reverse-engineering</td><td>APK / JAR 反编译、API 提取、Retrofit / OkHttp 调用链追踪。</td><td><div class="cmd"><code>/plugin marketplace add SimoneAvogadro/android-reverse-engineering-skill/plugin install android-reverse-engineering@android-reverse-engineering-skill</code><button class="copy" data-copy="/plugin marketplace add SimoneAvogadro/android-reverse-engineering-skill/plugin install android-reverse-engineering@android-reverse-engineering-skill">复制</button></div></td><td><a class="source" href="https://github.com/SimoneAvogadro/android-reverse-engineering-skill" target="_blank" rel="noopener">SimoneAvogadro ↗</a></td></tr>
-        <tr><td>Android · android-malware-with-jadx</td><td>使用 jadx 分析样本，提取逻辑、接口与可疑调用。</td><td><div class="cmd"><code>npx skills add https://github.com/mukul975/anthropic-cybersecurity-skills --skill reverse-engineering-android-malware-with-jadx</code><button class="copy" data-copy="npx skills add https://github.com/mukul975/anthropic-cybersecurity-skills --skill reverse-engineering-android-malware-with-jadx">复制</button></div></td><td><a class="source" href="https://github.com/mukul975/anthropic-cybersecurity-skills" target="_blank" rel="noopener">anthropic-cybersecurity-skills ↗</a></td></tr>
-        <tr><td>Windows · Ghidra / IDA RE Skill</td><td>EXE / DLL 静态分析、函数恢复，适合 JNI、native .so 和复杂调用链。</td><td><div class="cmd"><code>下载 SKILL.md → 放入 ~/.codex/skills/Ghidra_IDAReverseEngineeringSkill/</code><button class="copy" data-copy="下载 SKILL.md → 放入 ~/.codex/skills/Ghidra_IDAReverseEngineeringSkill/">复制</button></div></td><td><a class="source" href="https://github.com/a5c-ai/babysitter/blob/main/library/specializations/security-research/skills/ghidra-ida-re/SKILL.md" target="_blank" rel="noopener">Ghidra / IDA Skill ↗</a></td></tr>
-        <tr><td>Windows · ghidra-rpc</td><td>支持反编译、调用图、重命名、注释、结构体、Patch 和 diff 的 Ghidra agentic RE 工具。</td><td><div class="cmd"><code>git clone https://github.com/cellebrite-labs/ghidra-rpc.git</code><button class="copy" data-copy="git clone https://github.com/cellebrite-labs/ghidra-rpc.git">复制</button></div></td><td><a class="source" href="https://github.com/cellebrite-labs/ghidra-rpc" target="_blank" rel="noopener">cellebrite-labs/ghidra-rpc ↗</a></td></tr>
-        <tr><td>Web · protocol-reverse-engineering</td><td>协议抓包分析、字段还原、状态机推断、响应结构分析。</td><td><div class="cmd"><code>npx skills add https://github.com/wshobson/agents --skill protocol-reverse-engineering</code><button class="copy" data-copy="npx skills add https://github.com/wshobson/agents --skill protocol-reverse-engineering">复制</button></div></td><td><a class="source" href="https://github.com/wshobson/agents" target="_blank" rel="noopener">wshobson/agents ↗</a></td></tr>
-        <tr><td>Web · reverse-engineering-api</td><td>网站接口、前端请求、参数链与调用流程还原。</td><td><div class="cmd"><code>npx skills add https://github.com/kalil0321/reverse-api-engineer --skill reverse-engineering-api</code><button class="copy" data-copy="npx skills add https://github.com/kalil0321/reverse-api-engineer --skill reverse-engineering-api">复制</button></div></td><td><a class="source" href="https://github.com/kalil0321/reverse-api-engineer" target="_blank" rel="noopener">reverse-api-engineer ↗</a></td></tr>
-      </tbody></table></div>
-    </section>
-
     <section class="section" id="practice">
-      <div class="section-head"><p class="eyebrow">04 · 练习题</p><h2>把“我想知道”说成一个问题</h2><p class="section-lead">刚开始学习时，不用急着说术语。先描述你看到了什么、想确认什么，后面的工具选择会容易很多。</p></div>
-      <div class="practice"><article class="card"><strong>Android 应用</strong><p>“这个 APK 一打开就退出，我想先知道它的启动流程和错误点。”</p></article><article class="card"><strong>Windows 程序</strong><p>“这个 EXE 运行后生成了几个文件，我想看看它们之间有什么关系。”</p></article><article class="card"><strong>Web / 接口</strong><p>“点击登录后发出了哪些请求？我想把参数从哪里来理清楚。”</p></article><article class="card"><strong>CTF 题目</strong><p>“我已经确认了文件类型，下一步应该观察哪些保护和输入点？”</p></article></div>
+      <div class="section-head"><p class="eyebrow">03 · 练习题</p><h2>把“我想知道”说成一个问题</h2><p class="section-lead">刚开始学习时，不用急着说术语。按这个句式描述，就能得到清楚的下一步。</p></div>
+      <div class="practice"><article class="card"><strong>APK 应用</strong><p>我看到了什么：打开后立刻退出。<br>我想确认什么：它在哪一步停止。<br>请先告诉我下一步：先看启动时留下的提示或日志。</p></article><article class="card"><strong>Windows EXE</strong><p>我看到了什么：运行后多了几个文件。<br>我想确认什么：这些文件从哪里来。<br>请先告诉我下一步：先记录文件名、位置和出现时间。</p></article><article class="card"><strong>网页 / API</strong><p>我看到了什么：点登录后页面发送了请求。<br>我想确认什么：请求里带了什么。<br>请先告诉我下一步：先保存请求地址、参数和返回内容。</p></article><article class="card"><strong>未知文件</strong><p>我看到了什么：拿到一个不认识的文件。<br>我想确认什么：它是什么类型。<br>请先告诉我下一步：先查看文件名、大小和基本信息，不要急着打开。</p></article></div>
       <div class="checklist"><div class="check"><b>✓</b>目标与范围已经写清楚</div><div class="check"><b>✓</b>每个结论都有文件或日志证据</div><div class="check"><b>✓</b>脚本和命令可以重复运行</div><div class="check"><b>✓</b>报告包含下一步验证建议</div></div>
     </section>
 
-    <section class="cta"><p class="eyebrow" style="color:#c9b9ff">从一个具体目标开始</p><h2>先把一个文件看明白</h2><p>无限破甲不替你跳过思考，它帮你把问题拆小，把过程记下来。选一个自己有权限分析的样本，从第一行证据开始。</p><a class="primary" href="index.html">返回无限破甲首页 ↗</a></section>
+    <section class="cta" id="cta"><p class="eyebrow" style="color:#c9b9ff">学到这里，下一步有人带路</p><h2>你负责提出问题，路线和证据有人帮你理清。</h2><p>无限破甲不是替你跳过学习，而是把“描述问题、安排分析顺序、整理证据”这条路线接到 AI 上。适合想学逆向、但总卡在下一步的人。</p><div class="hero-actions" style="justify-content:center"><a class="primary" href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener">先试 7 天 · ¥19.9</a><a class="ghost" href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener">长期使用 · ¥68</a></div><p style="margin-top:18px;font-size:12px;color:#bfc2cf">它不能保证所有目标都有结果，也不能替代你对样本和证据的判断。</p></section>
   </main>
   <footer class="footer"><div class="wrap footer-row"><span>© 2026 无限破甲 · 软件逆向入门培训</span><span><strong>逆向知道的一切都在这里</strong> · 从看懂一个文件开始。</span></div></footer>
   <script>
-    document.querySelectorAll('[data-copy]').forEach((button)=>button.addEventListener('click',async()=>{const value=button.dataset.copy;try{await navigator.clipboard.writeText(value);button.textContent='已复制';setTimeout(()=>button.textContent='复制',1400)}catch{button.textContent='请手动复制';setTimeout(()=>button.textContent='复制',1400)}}));
-
     const courseDocs=[
-      {id:'start',kicker:'第 1 章 · 认识工具',title:'无限破甲是什么？',lead:'无限破甲是一套给软件分析和逆向学习准备的工作台。它把常见工具、Skills、资料和分析步骤整理在一起，让第一次接触的人知道从哪里下手。',points:[['它解决什么问题','你不用在一堆名词里盲目搜索，先按目标类型找到合适的入口。'],['它不会替你做什么','它不会凭空给出结论；文件、日志和你的判断仍然是分析的基础。'],['第一次怎么用','拿一个自己有权限分析的样本，先描述现象，再提出一个具体问题。']],note:'把无限破甲当成一张地图：它帮你找到路，但真正的判断要靠你一步步验证。'},
-      {id:'reverse',kicker:'第 2 章 · 基础概念',title:'软件逆向是什么？',lead:'软件逆向，就是把已经编译好的程序重新拆开观察。你会关心它读取了什么、调用了什么、数据怎么流动，以及这些行为为什么会发生。',points:[['静态分析','不运行程序，先看文件类型、字符串、依赖、入口和资源。'],['动态分析','让程序运行起来，观察输入、输出、文件变化和网络请求。'],['最后要得到什么','不是一堆截图，而是一条能说清楚、能复查的调用链或行为解释。']],note:'刚开始不必急着学会所有工具。先把“看到什么”和“想确认什么”写下来，学习会轻松很多。'},
-      {id:'static',kicker:'第 3 章 · 第一次观察',title:'先做静态分析：不运行也能看出线索',lead:'静态分析像检查一只没有打开的盒子。先确认样本是什么，再从明显的线索开始，不要一上来就跳到最复杂的工具。',points:[['先认文件','确认 APK、EXE、DLL、脚本或数据文件，以及它的版本和来源。'],['再找线索','看文件信息、字符串、导入函数、资源和可能的配置位置。'],['记录猜测','把“可能是登录校验”“可能会发请求”写成待验证的问题。']],note:'来源不明的文件不要直接在日常电脑上运行。教学和练习优先使用自己的程序、公开样本或隔离靶场。'},
-      {id:'dynamic',kicker:'第 4 章 · 验证假设',title:'再做动态分析：让线索接受验证',lead:'动态分析不是“多跑几次看看”，而是带着问题观察程序。每次只验证一个假设，结果更容易解释。',points:[['观察输入','记录启动参数、按钮操作、文件输入和网络请求。'],['观察变化','比较运行前后新增的文件、日志、进程和数据。'],['留下证据','保存时间、操作步骤、关键输出，方便之后重现。']],note:'动态分析应在你拥有权限的环境里进行。对陌生样本使用隔离环境，不要把真实账号或个人数据放进去。'},
-      {id:'routes',kicker:'第 5 章 · 选择方向',title:'按目标选择学习方向',lead:'《破甲话术.txt》里列了很多场景。对初学者来说，可以先把它们归成三条路，再逐步扩展。',points:[['Android / APK','从 Manifest、DEX、API 请求和网络层开始，适合练习移动应用分析。'],['Windows / EXE','从 PE 文件、入口函数、导入表和关键调用开始，适合练习桌面程序分析。'],['Web / API','从请求、响应、参数、认证流程和数据流开始，适合练习接口与协议分析。']],note:'不要同时学三条路。先选一个你手边能合法分析的目标，完成一轮“提出问题 → 找线索 → 做验证 → 写结论”。'},
-      {id:'practice',kicker:'第 6 章 · 练习模板',title:'把话术改成普通人能用的问题',lead:'原始资料里的场景很多，但真正有用的不是“说得像专家”，而是把目标、现象和想确认的事情讲清楚。',points:[['Web / API','“这是我有权限测试的应用，请先列出登录请求、参数来源和权限校验位置。”'],['APK / EXE','“这是我自己的程序，请先说明启动流程、关键模块和可能读取配置的地方。”'],['协议 / 数据','“这是一次请求和响应，请帮我标出字段变化，并告诉我下一步该验证什么。”']],note:'把“破解、绕过、直接拿结果”换成“分析流程、验证边界、记录证据”。这样更适合学习，也更容易得到可复查的答案。'}
+      {id:'start',kicker:'第 1 章 · 先弄懂这件事',title:'软件逆向到底是什么？',lead:'软件逆向就是观察一个程序，弄清它做了什么。你不需要先会复杂工具，只要先学会看现象、找线索、做确认。',points:[['先看结果','打开自己的样本后，写下你看到的结果：弹窗、文件变化，还是一次网页请求。'],['再问原因','把“它为什么这样做”写下来。这个问题就是你接下来要找的线索。'],['最后做确认','找到一个线索后，再找第二个证据确认它，不凭感觉下结论。']],note:'逆向不是猜程序的秘密。它是把看见的东西，一步步变成能说明白的结论。'},
+      {id:'objects',kicker:'第 2 章 · 先认识对象',title:'先认识你手里的文件',lead:'先别急着研究里面的内容。你要先知道手里是什么：手机应用、Windows 程序，还是网页发出的一次请求。',points:[['看文件名和后缀','例如 .apk 常见于 Android，.exe 常见于 Windows。先把名称和大小记下来。'],['看它从哪里来','写下来源、版本和拿到的时间。以后结果不同时，才知道比较的是不是同一个文件。'],['给它一句描述','例如“这是我自己的测试程序”或“这是登录时网页发出的请求”。']],note:'先认清对象，才不会走错方向。你不知道它是什么时，第一步永远是观察，不是运行。'},
+      {id:'questions',kicker:'第 3 章 · 学会提问',title:'学会问一个好问题',lead:'好的问题不用专业。只要包含三件事：你看到了什么、你想确认什么、你希望先做哪一步。',points:[['说现象','例如：“我点击登录后，页面转了一圈又回来了。”'],['说目标','例如：“我想确认它有没有发出登录请求。”'],['说下一步','例如：“请先告诉我该记录哪些信息。”']],note:'不要只问“帮我看看”。把看到的现象说出来，别人才能顺着你的线索往下找。'},
+      {id:'static',kicker:'第 4 章 · 不运行先观察',title:'不运行程序也能看什么？',lead:'静态观察就是不打开程序，先从外面看线索。像拿起一个盒子，先看标签、大小和里面有没有说明书。',points:[['看基本信息','记下文件名、大小、日期和类型。它们能帮你确认拿到的是否是同一份样本。'],['找看得懂的文字','看到网址、提示语或配置名称时，先复制下来。这些常常是下一步的入口。'],['写下一个猜测','例如：“这里可能和登录有关”。先标成猜测，等证据来确认。']],note:'静态观察的目的不是一次看懂全部，而是找到第一个值得验证的线索。'},
+      {id:'dynamic',kicker:'第 5 章 · 运行后做确认',title:'运行后如何验证猜测？',lead:'动态观察就是让程序做一次你指定的操作，再看哪里发生变化。一次只做一件事，结果才容易比较。',points:[['先定一个动作','例如只点击一次登录，或只打开一次某个页面。'],['记录前后变化','记下出现的提示、新增的文件、页面内容或请求结果。'],['对照你的猜测','如果变化和猜测不一致，就把猜测改掉，再做下一次小验证。']],note:'对自己有权限的样本做观察。陌生文件不要在日常环境里直接运行。'},
+      {id:'evidence',kicker:'第 6 章 · 把线索整理好',title:'把证据整理成结论',lead:'看到很多东西不等于搞明白。把时间、步骤和结果放在一起，别人才能复查，你自己下次也不会忘。',points:[['记下时间','每个关键现象都写下发生的时间，方便把前后操作对应起来。'],['记下步骤','用短句记录你点了什么、输入了什么、看到了什么。'],['分开已知和未知','已知的写证据；还不确定的写成下一次要验证的问题。']],note:'一个好结论不是“我觉得是这样”，而是“我做了什么，所以看到了什么”。'},
+      {id:'practice',kicker:'第 7 章 · 用真实场景练习',title:'用真实场景练习一次',lead:'现在选一个你有权限观察的对象，用同一套句式开始。先把问题说清楚，再决定看哪里。',points:[['APK','“我打开后立刻退出；我想确认它停在哪一步；请先告诉我该记录什么。”'],['EXE','“我运行后多了几个文件；我想确认它们从哪里来；请先告诉我先比对什么。”'],['网页或未知文件','“我看到一次请求／一个陌生文件；我想确认它是什么；请先告诉我先看哪些基本信息。”']],note:'你不需要一开始就答对。先把问题变小、把证据留下，这就是一次完整的逆向练习。'}
     ];
     const courseList=document.querySelector('#course-list');const courseTitle=document.querySelector('#course-title');const courseLead=document.querySelector('#course-lead');const coursePoints=document.querySelector('#course-points');const courseNote=document.querySelector('#course-note');const courseKicker=document.querySelector('#course-kicker');const courseCount=document.querySelector('#course-count');const courseProgress=document.querySelector('#course-progress');const coursePrev=document.querySelector('#course-prev');const courseNext=document.querySelector('#course-next');
     let currentCourse=0;
