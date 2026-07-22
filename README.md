@@ -32,6 +32,14 @@ python tools/sign_update_manifest.py `
   --allow-production-output
 ```
 
+The signer rejects ambiguous Win32 components (including trailing dots/spaces,
+reserved device names, and alternate data streams), resolves existing 8.3 aliases
+before applying the production gate, and refuses any key/output overlap. It stages
+both files in a unique sibling directory and swaps the complete directory as one
+transaction; if promotion fails, the previous pair is restored. An existing output
+directory must therefore be empty or contain exactly `latest.json` and
+`latest.json.sig`.
+
 Do not run the production command, add `latest.json`/`latest.json.sig`, or deploy the
 Pages site until the Windows package and every existing netdisk link have passed the
 release gate.

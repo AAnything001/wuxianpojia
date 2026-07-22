@@ -36,6 +36,31 @@
    headers, strict SemVer prerelease parsing, unchanged netdisk links, the non-release
    update-log wording, and absence of production manifest files.
 
+## Independent-review hardening
+
+Commit `ab4742c` received a separate security review. The follow-up implementation:
+
+1. Rejects every raw Windows path component with a trailing dot/space before path
+   resolution. The test creates `stable`, proves Windows treats `stable.` as the same
+   directory, and then proves validation rejects `stable.`, `stable `, nested dotted
+   components, drive-relative spellings, reserved device aliases, alternate data
+   streams, and the production `stable.` spelling even when production output is
+   otherwise allowed.
+2. Canonicalizes dot segments, junction/symlink targets, and existing Win32 8.3 names
+   before comparing the requested target with the protected production route.
+3. Rejects a private key anywhere inside the output tree, a hardlink alias between the
+   key and either final file, and any collision with the actual stage/backup paths.
+   Explicit stage and backup collision injections prove the key and old pair bytes
+   remain unchanged after rejection.
+4. Stages both files in a unique sibling directory, moves an existing complete pair to
+   a unique backup directory, and promotes the staged directory as a unit. Forced
+   failures on the second stage write and second `os.replace` preserve or restore the
+   previous manifest and signature byte-for-byte and remove transaction directories.
+5. Parses anchor `href` values and compares the exact netdisk URL set with the baseline
+   instead of merely searching the HTML source for expected substrings.
+6. Uses ASCII `[0-9]` ranges throughout SemVer parsing and rejects Unicode decimal
+   digits as well as numeric prerelease identifiers with leading zeroes.
+
 ## TDD evidence
 
 RED command:
@@ -57,6 +82,17 @@ python -m unittest tests/test_release_metadata.py -v
 Observed after implementation: 7 tests passed, 0 failures. A follow-up RED case proved
 that `1.30.1-01` was initially accepted; after tightening the SemVer expression, that
 case and the full suite passed.
+
+Independent-review RED/GREEN command:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+Observed RED: Win32 ambiguous components were accepted, Unicode SemVer digits were
+accepted, final-output key paths were overwritten, and a forced second replace left a
+new signature beside the old manifest. Observed GREEN after the hardening changes:
+16 tests passed, 0 failures.
 
 Additional verification:
 

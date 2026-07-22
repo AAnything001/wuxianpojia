@@ -1,9 +1,18 @@
+import argparse
+import contextlib
+import ctypes
+import importlib.util
+import io
 import json
+import os
 import subprocess
 import sys
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
+from unittest import mock
+from urllib.parse import urlparse
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
@@ -13,6 +22,48 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SIGNER = REPO_ROOT / "tools" / "sign_update_manifest.py"
 HEADERS = REPO_ROOT / "_headers"
 INDEX = REPO_ROOT / "index.html"
+SIGNER_SPEC = importlib.util.spec_from_file_location("wujin_update_signer", SIGNER)
+SIGNER_MODULE = importlib.util.module_from_spec(SIGNER_SPEC)
+SIGNER_SPEC.loader.exec_module(SIGNER_MODULE)
+
+
+class HrefCollector(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.download_hrefs = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            attributes = dict(attrs)
+            classes = attributes.get("class", "").split()
+            href = attributes.get("href")
+            if "download-option" in classes and href is not None:
+                self.download_hrefs.append(href)
+
+
+def write_private_key(path: Path) -> bytes:
+    encoded = Ed25519PrivateKey.generate().private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption(),
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(encoded)
+    return encoded
+
+
+def signer_args(key_path: Path, output_dir: Path, version="1.30.1"):
+    return [
+        str(SIGNER),
+        "--private-key",
+        str(key_path),
+        "--version",
+        version,
+        "--published-at",
+        "2026-07-22T00:00:00Z",
+        "--output-dir",
+        str(output_dir),
+    ]
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -46,9 +97,13 @@ class ReleaseMetadataTests(unittest.TestCase):
             "https://wwbbc.lanzouv.com/i95673xe26ti",
             "https://wwbbc.lanzouv.com/i9zwz3xnj43g",
         }
+        collector = HrefCollector()
+        collector.feed(page)
+        actual_urls = set(collector.download_hrefs)
 
-        for url in expected_urls:
-            self.assertIn(url, page)
+        self.assertEqual(expected_urls, actual_urls)
+        self.assertEqual(len(expected_urls), len(collector.download_hrefs))
+        self.assertTrue(all(urlparse(href).scheme == "https" for href in actual_urls))
 
     def test_production_manifest_is_not_present_before_packaging_approval(self):
         stable = REPO_ROOT / "downloads" / "wujin" / "stable"
@@ -161,6 +216,222 @@ class ReleaseMetadataTests(unittest.TestCase):
 
             self.assertNotEqual(0, result.returncode)
             self.assertIn("valid SemVer", result.stderr)
+
+    def test_signer_rejects_unicode_digits_in_semver(self):
+        with tempfile.TemporaryDirectory() as private_dir, tempfile.TemporaryDirectory() as output_dir:
+            key_path = Path(private_dir) / "update-private.pem"
+            write_private_key(key_path)
+            result = subprocess.run(
+                [sys.executable]
+                + signer_args(key_path, Path(output_dir), version="1.3٠.1"),
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("valid SemVer", result.stderr)
+
+    def test_signer_rejects_win32_trailing_dot_or_space_components(self):
+        with tempfile.TemporaryDirectory() as private_dir, tempfile.TemporaryDirectory() as parent_dir:
+            key_path = Path(private_dir) / "update-private.pem"
+            write_private_key(key_path)
+            stable = Path(parent_dir) / "stable"
+            stable.mkdir()
+
+            for ambiguous in (
+                Path(str(stable) + "."),
+                Path(str(stable) + " "),
+                Path(parent_dir) / "component." / "stable",
+                Path(parent_dir) / "NUL" / "stable",
+                Path(str(stable) + ":alternate"),
+                REPO_ROOT / "downloads" / "wujin" / "stable.",
+                Path(f"{REPO_ROOT.drive}downloads\\wujin\\stable"),
+            ):
+                with self.subTest(path=ambiguous):
+                    args = argparse.Namespace(
+                        private_key=key_path,
+                        output_dir=ambiguous,
+                        version="1.30.1",
+                        published_at="2026-07-22T00:00:00Z",
+                        allow_production_output=True,
+                    )
+                    with self.assertRaisesRegex(ValueError, "ambiguous Win32 path"):
+                        SIGNER_MODULE.validate_inputs(args)
+
+            if os.name == "nt":
+                self.assertTrue(Path(str(stable) + ".").exists())
+                self.assertTrue(os.path.samefile(stable, Path(str(stable) + ".")))
+
+    def test_production_gate_normalizes_dot_segments_and_win32_short_aliases(self):
+        with tempfile.TemporaryDirectory() as private_dir:
+            key_path = Path(private_dir) / "update-private.pem"
+            write_private_key(key_path)
+            spellings = [
+                REPO_ROOT / "downloads" / "wujin" / "nested" / ".." / "stable"
+            ]
+            if os.name == "nt":
+                buffer = ctypes.create_unicode_buffer(32768)
+                length = ctypes.windll.kernel32.GetShortPathNameW(
+                    str(REPO_ROOT), buffer, len(buffer)
+                )
+                if 0 < length < len(buffer):
+                    spellings.append(
+                        Path(buffer.value) / "downloads" / "wujin" / "stable"
+                    )
+
+            for spelling in spellings:
+                with self.subTest(path=spelling):
+                    args = argparse.Namespace(
+                        private_key=key_path,
+                        output_dir=spelling,
+                        version="1.30.1",
+                        published_at="2026-07-22T00:00:00Z",
+                        allow_production_output=False,
+                    )
+                    with self.assertRaisesRegex(ValueError, "production output is locked"):
+                        SIGNER_MODULE.validate_inputs(args)
+
+    def test_signer_rejects_key_inside_output_tree_without_changing_key_bytes(self):
+        for relative_key in ("latest.json", "latest.json.sig", "private.pem"):
+            with self.subTest(relative_key=relative_key), tempfile.TemporaryDirectory() as root_dir:
+                output_dir = Path(root_dir) / "stable"
+                key_path = output_dir / relative_key
+                original_key = write_private_key(key_path)
+                result = subprocess.run(
+                    [sys.executable] + signer_args(key_path, output_dir),
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn("overlap signing transaction paths", result.stderr)
+                self.assertEqual(original_key, key_path.read_bytes())
+
+    def test_signer_rejects_a_hardlink_alias_between_key_and_final_output(self):
+        with tempfile.TemporaryDirectory() as root_dir, tempfile.TemporaryDirectory() as private_dir:
+            output_dir = Path(root_dir) / "stable"
+            output_dir.mkdir()
+            key_path = Path(private_dir) / "update-private.pem"
+            original_key = write_private_key(key_path)
+            os.link(key_path, output_dir / "latest.json")
+
+            result = subprocess.run(
+                [sys.executable] + signer_args(key_path, output_dir),
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("overlap signing transaction paths", result.stderr)
+            self.assertEqual(original_key, key_path.read_bytes())
+
+    def test_signer_rejects_a_backup_path_collision_without_changing_any_input(self):
+        with tempfile.TemporaryDirectory() as root_dir, tempfile.TemporaryDirectory() as private_dir:
+            output_dir = Path(root_dir) / "stable"
+            output_dir.mkdir()
+            old_manifest = b'{"version":"old"}\n'
+            old_signature = b"s" * 64
+            (output_dir / "latest.json").write_bytes(old_manifest)
+            (output_dir / "latest.json.sig").write_bytes(old_signature)
+            key_path = Path(private_dir) / "update-private.pem"
+            original_key = write_private_key(key_path)
+
+            stderr = io.StringIO()
+            with mock.patch.object(sys, "argv", signer_args(key_path, output_dir)), mock.patch.object(
+                SIGNER_MODULE, "reserve_backup_path", return_value=key_path
+            ), contextlib.redirect_stderr(stderr):
+                result = SIGNER_MODULE.main()
+
+            self.assertEqual(2, result)
+            self.assertIn("overlap signing transaction paths", stderr.getvalue())
+            self.assertEqual(original_key, key_path.read_bytes())
+            self.assertEqual(old_manifest, (output_dir / "latest.json").read_bytes())
+            self.assertEqual(old_signature, (output_dir / "latest.json.sig").read_bytes())
+
+    def test_signer_rejects_a_stage_path_collision_without_changing_the_key(self):
+        with tempfile.TemporaryDirectory() as root_dir, tempfile.TemporaryDirectory() as private_dir:
+            output_dir = Path(root_dir) / "stable"
+            output_dir.mkdir()
+            key_path = Path(private_dir) / "update-private.pem"
+            original_key = write_private_key(key_path)
+
+            stderr = io.StringIO()
+            with mock.patch.object(sys, "argv", signer_args(key_path, output_dir)), mock.patch.object(
+                SIGNER_MODULE.tempfile, "mkdtemp", return_value=str(key_path)
+            ), contextlib.redirect_stderr(stderr):
+                result = SIGNER_MODULE.main()
+
+            self.assertEqual(2, result)
+            self.assertIn("overlap signing transaction paths", stderr.getvalue())
+            self.assertEqual(original_key, key_path.read_bytes())
+            self.assertEqual(set(), {entry.name for entry in output_dir.iterdir()})
+
+    def test_pair_commit_failure_restores_the_complete_previous_pair(self):
+        with tempfile.TemporaryDirectory() as root_dir, tempfile.TemporaryDirectory() as private_dir:
+            output_dir = Path(root_dir) / "stable"
+            output_dir.mkdir()
+            old_manifest = b'{"version":"old"}\n'
+            old_signature = b"s" * 64
+            (output_dir / "latest.json").write_bytes(old_manifest)
+            (output_dir / "latest.json.sig").write_bytes(old_signature)
+            key_path = Path(private_dir) / "update-private.pem"
+            write_private_key(key_path)
+            real_replace = os.replace
+            replace_count = 0
+
+            def fail_second_replace(source, destination):
+                nonlocal replace_count
+                replace_count += 1
+                if replace_count == 2:
+                    raise OSError("injected second replace failure")
+                return real_replace(source, destination)
+
+            stderr = io.StringIO()
+            with mock.patch.object(sys, "argv", signer_args(key_path, output_dir)), mock.patch.object(
+                SIGNER_MODULE.os, "replace", side_effect=fail_second_replace
+            ), contextlib.redirect_stderr(stderr):
+                result = SIGNER_MODULE.main()
+
+            self.assertEqual(2, result)
+            self.assertIn("injected second replace failure", stderr.getvalue())
+            self.assertEqual(old_manifest, (output_dir / "latest.json").read_bytes())
+            self.assertEqual(old_signature, (output_dir / "latest.json.sig").read_bytes())
+            self.assertEqual([], list(Path(root_dir).glob(".stable.wujin-*")))
+
+    def test_second_stage_write_failure_leaves_the_previous_pair_unchanged(self):
+        with tempfile.TemporaryDirectory() as root_dir, tempfile.TemporaryDirectory() as private_dir:
+            output_dir = Path(root_dir) / "stable"
+            output_dir.mkdir()
+            old_manifest = b'{"version":"old"}\n'
+            old_signature = b"s" * 64
+            (output_dir / "latest.json").write_bytes(old_manifest)
+            (output_dir / "latest.json.sig").write_bytes(old_signature)
+            key_path = Path(private_dir) / "update-private.pem"
+            write_private_key(key_path)
+            real_write = SIGNER_MODULE.write_durable
+            write_count = 0
+
+            def fail_second_write(path, content):
+                nonlocal write_count
+                write_count += 1
+                if write_count == 2:
+                    raise OSError("injected second stage write failure")
+                return real_write(path, content)
+
+            stderr = io.StringIO()
+            with mock.patch.object(sys, "argv", signer_args(key_path, output_dir)), mock.patch.object(
+                SIGNER_MODULE, "write_durable", side_effect=fail_second_write
+            ), contextlib.redirect_stderr(stderr):
+                result = SIGNER_MODULE.main()
+
+            self.assertEqual(2, result)
+            self.assertIn("injected second stage write failure", stderr.getvalue())
+            self.assertEqual(old_manifest, (output_dir / "latest.json").read_bytes())
+            self.assertEqual(old_signature, (output_dir / "latest.json.sig").read_bytes())
+            self.assertEqual([], list(Path(root_dir).glob(".stable.wujin-*")))
 
 
 if __name__ == "__main__":
