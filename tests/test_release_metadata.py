@@ -86,11 +86,15 @@ class ReleaseMetadataTests(unittest.TestCase):
             headers,
         )
 
-    def test_update_log_marks_1_30_1_as_development_not_an_available_package(self):
+    def test_update_log_marks_1_30_1_as_an_available_single_exe_release(self):
         page = INDEX.read_text(encoding="utf-8")
 
-        self.assertIn("Windows v1.30.1", page)
-        self.assertIn("开发中（尚未提供下载包）", page)
+        self.assertIn('datetime="2026-07-23">2026.07.23</time>', page)
+        self.assertIn("Windows v1.30.1 · 正式发布", page)
+        self.assertIn("Windows 10 / 11 x64 单文件 EXE 已发布", page)
+        self.assertIn("内置 11 项免费工具助手", page)
+        self.assertIn("支持签名校验的手动检查更新", page)
+        self.assertNotIn("开发中（尚未提供下载包）", page)
 
     def test_existing_netdisk_urls_are_unchanged(self):
         page = INDEX.read_text(encoding="utf-8")
