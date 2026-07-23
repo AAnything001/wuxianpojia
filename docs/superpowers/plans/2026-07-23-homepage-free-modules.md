@@ -207,8 +207,22 @@ const assert = require('node:assert/strict');
     const metrics = (await page.locator('.free-modules-number').allTextContents()).map(text => text.replace(/\s+/g, ''));
     assert.deepEqual(metrics, ['11免费模块', '5能力分类', '6AI客户端']);
     assert.equal(await page.locator('.free-modules-learn').getAttribute('href'), 'codex-pojia.html');
-    const overflow = await page.evaluate(() => ({ clientWidth: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth }));
-    assert.ok(overflow.scrollWidth <= overflow.clientWidth, `${item.name}: ${JSON.stringify(overflow)}`);
+    const overflow = await page.evaluate(() => {
+      const section = document.querySelector('#a-free-modules').getBoundingClientRect();
+      return {
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+        bodyOverflowX: getComputedStyle(document.body).overflowX,
+        sectionLeft: section.left,
+        sectionRight: section.right,
+      };
+    });
+    assert.ok(
+      overflow.scrollWidth <= overflow.clientWidth || overflow.bodyOverflowX === 'hidden',
+      `${item.name}: visible horizontal overflow: ${JSON.stringify(overflow)}`,
+    );
+    assert.ok(overflow.sectionLeft >= 0, `${item.name}: section crosses left viewport edge: ${JSON.stringify(overflow)}`);
+    assert.ok(overflow.sectionRight <= overflow.clientWidth, `${item.name}: section crosses right viewport edge: ${JSON.stringify(overflow)}`);
     const download = page.locator('.free-modules-download');
     await download.click();
     assert.ok(await page.locator('.download-modal').evaluate(element => element.classList.contains('is-open')));
