@@ -104,6 +104,7 @@ class SiteFooterTests(unittest.TestCase):
         self.assertTrue(css_path.is_file())
         css = css_path.read_text(encoding="utf-8")
         self.assertIn(".site-footer", css)
+        self.assertIn("--footer-bg: #f4f6fa", css)
         self.assertIn(":focus-visible", css)
         self.assertIn("@media (max-width: 899px)", css)
         self.assertIn("@media (max-width: 600px)", css)

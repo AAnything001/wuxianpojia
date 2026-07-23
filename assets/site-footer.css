@@ -1,13 +1,14 @@
 footer.site-footer {
-  --footer-bg: #0b1019;
-  --footer-panel: #111925;
-  --footer-line: #263143;
-  --footer-text: #f4f6fa;
-  --footer-muted: #a6afbd;
-  --footer-accent: #ff5268;
+  --footer-bg: #f4f6fa;
+  --footer-panel: #ffffff;
+  --footer-line: #dfe3ea;
+  --footer-text: #20232c;
+  --footer-muted: #697080;
+  --footer-accent: #ef4778;
   margin: 0;
   padding: 0;
   border: 0;
+  border-top: 1px solid var(--footer-line);
   background: var(--footer-bg);
   color: var(--footer-muted);
   font-family: Inter, "Segoe UI", "Microsoft YaHei", sans-serif;
@@ -27,7 +28,7 @@ footer.site-footer a {
 }
 
 footer.site-footer a:hover {
-  color: var(--footer-text);
+  color: var(--footer-accent);
 }
 
 footer.site-footer a:focus-visible {
@@ -130,8 +131,8 @@ footer.site-footer img.site-footer__brand-logo {
 }
 
 .site-footer__partner-link:hover {
-  border-color: #46546b;
-  background: #151f2d;
+  border-color: #c9bff1;
+  background: #fbfaff;
 }
 
 footer.site-footer img.site-footer__partner-logo {
@@ -162,7 +163,7 @@ footer.site-footer img.site-footer__partner-logo {
   justify-content: space-between;
   gap: 24px;
   padding: 24px 0 30px;
-  color: #7f8998;
+  color: #858c9a;
   font-size: 11px;
 }
 
