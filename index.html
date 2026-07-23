@@ -189,7 +189,15 @@ Question: Three radically different sales-page designs, switchable via ?variant=
     @media(max-width:600px){.a .hero h1{font-size:28px!important}}
     @media(min-width:601px){.a .hero .lead:not(.em){margin-bottom:80px}.a .hero .em{margin-bottom:0}.a .hero .cta-row{margin-top:60px}}
   </style>
-  <link rel="stylesheet" href="/assets/site-footer.css">
+    <style>
+      .a .hero .download-btn{position:relative;padding-inline:88px}
+      .a .hero-download-update-badge{position:absolute;top:50%;right:14px;display:inline-flex;align-items:center;justify-content:center;padding:6px 8px;overflow:hidden;isolation:isolate;border-radius:999px;background:var(--red);color:#fff;font-size:10px;font-weight:900;line-height:1;white-space:nowrap;box-shadow:0 4px 14px rgba(255,55,55,.34);transform:translateY(-50%);pointer-events:none}
+      .a .hero-download-update-badge::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.78) 49%,rgba(255,255,255,.28) 53%,transparent 60%);transform:translateX(-100%);animation:hero-update-badge-sheen 2.8s ease-in-out infinite;pointer-events:none}
+      @keyframes hero-update-badge-sheen{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+      @media(prefers-reduced-motion:reduce){.a .hero-download-update-badge::after{animation:none}}
+      @media(max-width:600px){.a .hero .download-btn{padding-inline:74px}.a .hero-download-update-badge{right:12px;padding:5px 7px;font-size:9px}}
+    </style>
+    <link rel="stylesheet" href="/assets/site-footer.css">
 </head>
 <body>
   <div class="proto-note">文案预览 · 选择你的进入方式</div>
@@ -240,7 +248,7 @@ Question: Three radically different sales-page designs, switchable via ?variant=
       <section aria-label="联系与购买">
         <strong class="site-footer__section-title">联系与购买</strong>
         <div class="site-footer__links">
-          <span>客服 QQ：1606654577</span>
+          <a href="mailto:admin@hwtoken.top">联系邮箱：admin@hwtoken.top</a>
           <a href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener noreferrer">体验 37 天 · ¥19.9</a>
           <a href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener noreferrer">永久授权 · ¥68</a>
         </div>
@@ -289,6 +297,14 @@ Question: Three radically different sales-page designs, switchable via ?variant=
     </section>
   </div>
   <script>
+    const heroDownloadButton=document.querySelector('.variant.a .hero .download-btn[data-download-placeholder]');
+    if(heroDownloadButton&&!heroDownloadButton.querySelector('.hero-download-update-badge')){
+      const heroUpdateBadge=document.createElement('span');
+      heroUpdateBadge.className='hero-download-update-badge';
+      heroUpdateBadge.setAttribute('aria-label','Windows v1.30.1 已发布');
+      heroUpdateBadge.textContent='新版本';
+      heroDownloadButton.append(heroUpdateBadge);
+    }
     const downloadModal=document.querySelector('[data-download-modal]');let downloadReturnFocus=null;
     const openDownloadModal=event=>{event.preventDefault();downloadReturnFocus=event.currentTarget;downloadModal.classList.add('is-open');downloadModal.setAttribute('aria-hidden','false');document.documentElement.classList.add('download-modal-open');document.body.classList.add('download-modal-open');requestAnimationFrame(()=>downloadModal.querySelector('[data-download-close]')?.focus())};
     const closeDownloadModal=()=>{if(!downloadModal.classList.contains('is-open'))return;downloadModal.classList.remove('is-open');downloadModal.setAttribute('aria-hidden','true');document.documentElement.classList.remove('download-modal-open');document.body.classList.remove('download-modal-open');downloadReturnFocus?.focus()};

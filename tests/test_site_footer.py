@@ -17,6 +17,8 @@ INTERNAL_LINKS = {
     "/user-notice",
 }
 PARTNER_URL = "https://www.xlsxdiffmerge.com/"
+CONTACT_EMAIL = "admin@hwtoken.top"
+CONTACT_EMAIL_HREF = f"mailto:{CONTACT_EMAIL}"
 PAYMENT_LINKS = {
     "https://pay.ldxp.cn/item/bz252j",
     "https://pay.ldxp.cn/item/r778vo",
@@ -30,6 +32,7 @@ class FooterCollector(HTMLParser):
         self.footer_count = 0
         self.footer_classes = set()
         self.footer_links = []
+        self.footer_text = []
         self.stylesheets = []
         self.images = []
 
@@ -52,6 +55,10 @@ class FooterCollector(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "footer" and self.footer_depth:
             self.footer_depth -= 1
+
+    def handle_data(self, data):
+        if self.footer_depth:
+            self.footer_text.append(data)
 
 
 class SiteFooterTests(unittest.TestCase):
@@ -98,6 +105,16 @@ class SiteFooterTests(unittest.TestCase):
         logo_path = REPO_ROOT / "assets" / "partners" / "xlsxdiffmerge-logo.png"
         self.assertTrue(logo_path.is_file())
         self.assertEqual(b"\x89PNG\r\n\x1a\n", logo_path.read_bytes()[:8])
+
+    def test_every_footer_uses_the_contact_email(self):
+        for path in HTML_FILES:
+            with self.subTest(path=path.relative_to(REPO_ROOT)):
+                footer = self.parse(path)
+                hrefs = {link.get("href") for link in footer.footer_links}
+                text = " ".join(footer.footer_text)
+                self.assertIn(CONTACT_EMAIL_HREF, hrefs)
+                self.assertIn(f"联系邮箱：{CONTACT_EMAIL}", text)
+                self.assertNotIn("1606654577", text)
 
     def test_shared_styles_cover_focus_and_breakpoints(self):
         css_path = REPO_ROOT / "assets" / "site-footer.css"
