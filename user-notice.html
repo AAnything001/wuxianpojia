@@ -64,6 +64,7 @@
       .footer-row span{display:block;margin-top:7px}
     }
   </style>
+  <link rel="stylesheet" href="/assets/site-footer.css">
 </head>
 <body>
   <header class="nav wrap">
@@ -94,11 +95,58 @@
       <p>产品提供分析辅助、工具配置和研究路线，不保证所有目标均可分析成功，也不保证 AI 输出、第三方工具或用户环境始终准确、可用或兼容。用户应在执行修改、补丁、批处理或其他高风险操作前备份重要文件，并独立复核最终结果。在法律允许的范围内，因超出设计用途、未备份、误操作、第三方服务故障或用户违法使用导致的损失由用户承担；法律不可排除的消费者权利不受本条影响。</p>
     </section>
   </main>
-  <footer class="footer">
-    <div class="wrap footer-row">
-      <span>© 2026 无限破甲 · 用户使用须知协议</span>
-      <span><a href="index.html">返回首页</a> · <a href="codex-pojia.html">Codex 破甲介绍</a> · <a href="knowledge/">Codex 破甲知识库</a></span>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <section class="site-footer__brand" aria-label="无限破甲">
+        <a class="site-footer__brand-link" href="/" aria-label="无限破甲首页">
+          <img class="site-footer__brand-logo" src="/assets/brand-gradient.svg" width="42" height="42" alt="">
+          <span class="site-footer__brand-name">无限破甲</span>
+        </a>
+        <p class="site-footer__brand-tagline">让 AI 真正开始分析，把每一步变成可验证、可复用的逆向工作流。</p>
+      </section>
+      <section aria-label="产品">
+        <strong class="site-footer__section-title">产品</strong>
+        <div class="site-footer__links">
+          <a href="/">官网首页</a>
+          <a href="/#download">软件下载</a>
+          <a href="/codex-pojia">Codex 破甲</a>
+          <a href="/#a-updates">更新日志</a>
+        </div>
+      </section>
+      <section aria-label="资源与条款">
+        <strong class="site-footer__section-title">资源与条款</strong>
+        <div class="site-footer__links">
+          <a href="/knowledge/">Codex 破甲知识库</a>
+          <a href="/培训文案">软件逆向培训</a>
+          <a href="/user-notice">用户使用须知</a>
+        </div>
+      </section>
+      <section aria-label="联系与购买">
+        <strong class="site-footer__section-title">联系与购买</strong>
+        <div class="site-footer__links">
+          <span>客服 QQ：1606654577</span>
+          <a href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener noreferrer">体验 37 天 · ¥19.9</a>
+          <a href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener noreferrer">永久授权 · ¥68</a>
+        </div>
+      </section>
     </div>
-  </footer>
+    <div class="site-footer__partners">
+      <span class="site-footer__partners-label">友情链接</span>
+      <a class="site-footer__partner-link" href="https://www.xlsxdiffmerge.com/" target="_blank" rel="noopener noreferrer" aria-label="访问 XlsxDiffMerge 网站 xlsxdiffmerge.com">
+        <img class="site-footer__partner-logo" src="/assets/partners/xlsxdiffmerge-logo.png" width="44" height="44" alt="XlsxDiffMerge">
+        <span class="site-footer__partner-copy">
+          <strong class="site-footer__partner-name">XlsxDiffMerge</strong>
+          <small class="site-footer__partner-domain">xlsxdiffmerge.com</small>
+        </span>
+        <span class="site-footer__partner-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 无限破甲。保留所有权利。</span>
+      <span>仅供逆向学习研究，使用时应遵守当地法律法规。</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

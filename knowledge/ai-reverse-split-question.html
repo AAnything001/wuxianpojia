@@ -50,6 +50,7 @@
 }
   </script>
   <style>:root{--ink:#171a23;--muted:#687183;--line:#e3e7ef;--red:#ff3045;--violet:#8058e8;--shadow:0 14px 38px rgba(39,45,68,.07)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#fff 0%,#f7f8fc 70%,#f1f4fa 100%);line-height:1.78}a{color:inherit;text-decoration:none}.wrap{width:min(1060px,calc(100% - 32px));margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:9px;font-weight:950}.brand img{width:34px;height:34px}.navlinks{display:flex;gap:16px;color:#687080;font-size:13px}.navlinks a:hover{color:#171a23}.hero{padding:58px 0 34px}.eyebrow{margin:0;color:#7658d7;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}h1{max-width:820px;margin:13px 0 16px;font-size:clamp(32px,5vw,58px);line-height:1.08;letter-spacing:0}h2{margin:0 0 10px;font-size:clamp(24px,3.2vw,36px);line-height:1.16;letter-spacing:0}.lead{max-width:760px;margin:0;color:var(--muted);font-size:17px}.section{padding:34px 0}.category{padding:25px 0;border-top:1px solid var(--line)}.article-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:17px}.article-link{display:block;padding:17px 18px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.82);box-shadow:0 8px 24px rgba(39,45,68,.045)}.article-link strong{display:block;margin-bottom:4px}.article-link span{display:block;color:var(--muted);font-size:13px}.article{max-width:820px;padding:42px 0 62px}.article p{color:#475064}.article .lead{font-size:18px}.note{margin:28px 0;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:var(--shadow)}.steps{display:grid;gap:10px;margin:18px 0}.step{padding:16px 18px;border:1px solid var(--line);border-radius:8px;background:#fff}.step b{color:var(--red)}.related{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.related a{padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:#5e6675;background:#fff;font-size:13px}.footer{padding:30px 0 46px;border-top:1px solid var(--line);color:#858c9a;font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:18px}.footer a{text-decoration:underline;text-underline-offset:3px}@media(max-width:720px){.nav{align-items:flex-start;flex-direction:column}.article-list{grid-template-columns:1fr}.footer-row{display:block}.footer-row span{display:block;margin-top:7px}}</style>
+  <link rel="stylesheet" href="/assets/site-footer.css">
 </head>
 <body>
   <header class="nav wrap"><a class="brand" href="../"><img src="../assets/brand-gradient.svg" alt="无限破甲"><span>无限破甲</span></a><nav class="navlinks" aria-label="页面导航"><a href="./">知识库</a><a href="../codex-pojia">Codex 破甲</a><a href="../培训文案">软件逆向培训</a></nav></header>
@@ -65,6 +66,58 @@
           <a href="ai-reverse-sample-info">ai逆向如何补充样本信息</a>
           <a href="ai-reverse-codex-steps">ai逆向如何让Codex给步骤</a></div></section>
   </main>
-  <footer class="footer"><div class="wrap footer-row"><span>© 2026 无限破甲 · Codex 破甲知识库</span><span><a href="../">返回首页</a> · <a href="../codex-pojia">Codex 破甲专题</a></span></div></footer>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <section class="site-footer__brand" aria-label="无限破甲">
+        <a class="site-footer__brand-link" href="/" aria-label="无限破甲首页">
+          <img class="site-footer__brand-logo" src="/assets/brand-gradient.svg" width="42" height="42" alt="">
+          <span class="site-footer__brand-name">无限破甲</span>
+        </a>
+        <p class="site-footer__brand-tagline">让 AI 真正开始分析，把每一步变成可验证、可复用的逆向工作流。</p>
+      </section>
+      <section aria-label="产品">
+        <strong class="site-footer__section-title">产品</strong>
+        <div class="site-footer__links">
+          <a href="/">官网首页</a>
+          <a href="/#download">软件下载</a>
+          <a href="/codex-pojia">Codex 破甲</a>
+          <a href="/#a-updates">更新日志</a>
+        </div>
+      </section>
+      <section aria-label="资源与条款">
+        <strong class="site-footer__section-title">资源与条款</strong>
+        <div class="site-footer__links">
+          <a href="/knowledge/">Codex 破甲知识库</a>
+          <a href="/培训文案">软件逆向培训</a>
+          <a href="/user-notice">用户使用须知</a>
+        </div>
+      </section>
+      <section aria-label="联系与购买">
+        <strong class="site-footer__section-title">联系与购买</strong>
+        <div class="site-footer__links">
+          <span>客服 QQ：1606654577</span>
+          <a href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener noreferrer">体验 37 天 · ¥19.9</a>
+          <a href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener noreferrer">永久授权 · ¥68</a>
+        </div>
+      </section>
+    </div>
+    <div class="site-footer__partners">
+      <span class="site-footer__partners-label">友情链接</span>
+      <a class="site-footer__partner-link" href="https://www.xlsxdiffmerge.com/" target="_blank" rel="noopener noreferrer" aria-label="访问 XlsxDiffMerge 网站 xlsxdiffmerge.com">
+        <img class="site-footer__partner-logo" src="/assets/partners/xlsxdiffmerge-logo.png" width="44" height="44" alt="XlsxDiffMerge">
+        <span class="site-footer__partner-copy">
+          <strong class="site-footer__partner-name">XlsxDiffMerge</strong>
+          <small class="site-footer__partner-domain">xlsxdiffmerge.com</small>
+        </span>
+        <span class="site-footer__partner-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 无限破甲。保留所有权利。</span>
+      <span>仅供逆向学习研究，使用时应遵守当地法律法规。</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

@@ -75,6 +75,7 @@
     .hero h1{font-size:clamp(36px,5.2vw,64px)}
     @media(max-width:620px){.section#course h2{font-size:31px}.hero h1{font-size:38px}}
   </style>
+  <link rel="stylesheet" href="/assets/site-footer.css">
 </head>
 <body>
   <div class="topline">无限破甲 · 软件逆向入门 · 从看懂文件开始</div>
@@ -145,7 +146,59 @@
 
     <section class="cta" id="cta"><p class="eyebrow" style="color:#c9b9ff">学到这里，下一步有人带路</p><h2>你负责提出问题，路线和证据有人帮你理清。</h2><p>无限破甲不是替你跳过学习，而是把“描述问题、安排分析顺序、整理证据”这条路线接到 AI 上。适合想学逆向、但总卡在下一步的人。原 7 天 + 限时赠 30 天，共 37 天。</p><div class="hero-actions" style="justify-content:center"><a class="primary" href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener">限时体验 37 天 · ¥19.9</a><a class="ghost" href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener">长期使用 · ¥68</a></div><p style="margin-top:18px;font-size:12px;color:#bfc2cf">它不能保证所有目标都有结果，也不能替代你对样本和证据的判断。所有内容基于 CTF 环境研究，提供学习路径，请勿违反当地法律法规。</p></section>
   </main>
-  <footer class="footer"><div class="wrap footer-row"><span>© 2026 无限破甲 · 软件逆向入门培训</span><span><strong>逆向知道的一切都在这里</strong> · 从看懂一个文件开始。</span></div></footer>
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <section class="site-footer__brand" aria-label="无限破甲">
+        <a class="site-footer__brand-link" href="/" aria-label="无限破甲首页">
+          <img class="site-footer__brand-logo" src="/assets/brand-gradient.svg" width="42" height="42" alt="">
+          <span class="site-footer__brand-name">无限破甲</span>
+        </a>
+        <p class="site-footer__brand-tagline">让 AI 真正开始分析，把每一步变成可验证、可复用的逆向工作流。</p>
+      </section>
+      <section aria-label="产品">
+        <strong class="site-footer__section-title">产品</strong>
+        <div class="site-footer__links">
+          <a href="/">官网首页</a>
+          <a href="/#download">软件下载</a>
+          <a href="/codex-pojia">Codex 破甲</a>
+          <a href="/#a-updates">更新日志</a>
+        </div>
+      </section>
+      <section aria-label="资源与条款">
+        <strong class="site-footer__section-title">资源与条款</strong>
+        <div class="site-footer__links">
+          <a href="/knowledge/">Codex 破甲知识库</a>
+          <a href="/培训文案">软件逆向培训</a>
+          <a href="/user-notice">用户使用须知</a>
+        </div>
+      </section>
+      <section aria-label="联系与购买">
+        <strong class="site-footer__section-title">联系与购买</strong>
+        <div class="site-footer__links">
+          <span>客服 QQ：1606654577</span>
+          <a href="https://pay.ldxp.cn/item/bz252j" target="_blank" rel="noopener noreferrer">体验 37 天 · ¥19.9</a>
+          <a href="https://pay.ldxp.cn/item/r778vo" target="_blank" rel="noopener noreferrer">永久授权 · ¥68</a>
+        </div>
+      </section>
+    </div>
+    <div class="site-footer__partners">
+      <span class="site-footer__partners-label">友情链接</span>
+      <a class="site-footer__partner-link" href="https://www.xlsxdiffmerge.com/" target="_blank" rel="noopener noreferrer" aria-label="访问 XlsxDiffMerge 网站 xlsxdiffmerge.com">
+        <img class="site-footer__partner-logo" src="/assets/partners/xlsxdiffmerge-logo.png" width="44" height="44" alt="XlsxDiffMerge">
+        <span class="site-footer__partner-copy">
+          <strong class="site-footer__partner-name">XlsxDiffMerge</strong>
+          <small class="site-footer__partner-domain">xlsxdiffmerge.com</small>
+        </span>
+        <span class="site-footer__partner-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 无限破甲。保留所有权利。</span>
+      <span>仅供逆向学习研究，使用时应遵守当地法律法规。</span>
+    </div>
+  </div>
+</footer>
   <script>
     const courseDocs=[
       {id:'start',kicker:'第 1 章 · 先弄懂这件事',title:'软件逆向到底是什么？',lead:'软件逆向就是观察一个程序，弄清它做了什么。你不需要先会复杂工具，只要先学会看现象、找线索、做确认。',points:[['先看结果','打开自己的样本后，写下你看到的结果：弹窗、文件变化，还是一次网页请求。'],['再问原因','把“它为什么这样做”写下来。这个问题就是你接下来要找的线索。'],['最后做确认','找到一个线索后，再找第二个证据确认它，不凭感觉下结论。']],note:'逆向不是猜程序的秘密。它是把看见的东西，一步步变成能说明白的结论。'},
