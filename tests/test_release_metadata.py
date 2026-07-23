@@ -15,7 +15,10 @@ from unittest import mock
 from urllib.parse import urlparse
 
 from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+    Ed25519PrivateKey,
+    Ed25519PublicKey,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -105,11 +108,29 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertEqual(len(expected_urls), len(collector.download_hrefs))
         self.assertTrue(all(urlparse(href).scheme == "https" for href in actual_urls))
 
-    def test_production_manifest_is_not_present_before_packaging_approval(self):
+    def test_production_manifest_is_valid_and_signed(self):
         stable = REPO_ROOT / "downloads" / "wujin" / "stable"
+        manifest = (stable / "latest.json").read_bytes()
+        signature = (stable / "latest.json.sig").read_bytes()
+        data = json.loads(manifest)
 
-        self.assertFalse((stable / "latest.json").exists())
-        self.assertFalse((stable / "latest.json.sig").exists())
+        self.assertEqual(
+            {
+                "schema_version": 1,
+                "product": "wujin-reverse-skill",
+                "channel": "stable",
+                "version": "1.30.1",
+                "published_at": "2026-07-23T13:38:57Z",
+                "download_page": "https://codexpojia.com/#download",
+                "release_notes_url": "https://codexpojia.com/#a-updates",
+            },
+            data,
+        )
+        self.assertEqual(64, len(signature))
+        public_key = bytes.fromhex(
+            "9eb3b20cc6fba13a26a6a6d3485e65b681db654c25ce352bce7b314e08574695"
+        )
+        Ed25519PublicKey.from_public_bytes(public_key).verify(signature, manifest)
 
     def test_signer_writes_deterministic_exact_json_and_detached_signature(self):
         with tempfile.TemporaryDirectory() as private_dir, tempfile.TemporaryDirectory() as first_dir, tempfile.TemporaryDirectory() as second_dir:
