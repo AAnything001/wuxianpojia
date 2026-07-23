@@ -97,7 +97,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         expected_urls = {
             "https://pan.baidu.com/s/1wvuMX5b-ATgDE-hhCmbakg?pwd=uigu",
             "https://pan.quark.cn/s/fe6c168221f6",
-            "https://wwbbc.lanzouv.com/i95673xe26ti",
+            "https://wwbbc.lanzouv.com/i00e63y89uvg",
             "https://wwbbc.lanzouv.com/i9zwz3xnj43g",
         }
         collector = HrefCollector()
