@@ -86,9 +86,17 @@ class ReleaseMetadataTests(unittest.TestCase):
             headers,
         )
 
-    def test_update_log_highlights_the_1_30_1_major_release(self):
+    def test_update_log_highlights_the_1_30_3_release_and_preserves_history(self):
         page = INDEX.read_text(encoding="utf-8")
 
+        self.assertIn('datetime="2026-07-24">2026.07.24</time>', page)
+        self.assertIn("Windows v1.30.3 · 新用户配置与协议流程优化", page)
+        self.assertIn(
+            "提高新用户首次配置成功率；新增配置冲突检查与修复，并优化用户协议确认流程。",
+            page,
+        )
+        self.assertIn("'Windows v1.30.3 已发布'", page)
+        self.assertIn('"dateModified": "2026-07-24"', page)
         self.assertIn('datetime="2026-07-23">2026.07.23</time>', page)
         self.assertIn("Windows v1.30.1 · 大版本更新，务必下载", page)
         self.assertIn("更新 5.5 破甲方案，新增支持 5.6 最新方案；新增免费模块，进一步增强你的 AI。", page)
