@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import unittest
 
 
@@ -27,6 +28,13 @@ def stylesheets(path):
     return collector.stylesheets
 
 
+def declaration_block(css, selector):
+    match = re.search(rf"{re.escape(selector)}\s*\{{([^}}]+)\}}", css)
+    if match is None:
+        raise AssertionError(f"CSS selector not found: {selector}")
+    return match.group(1)
+
+
 class TypographySystemTests(unittest.TestCase):
     def test_production_page_inventory_is_stable(self):
         self.assertEqual(4, len(ROOT_HTML))
@@ -39,7 +47,7 @@ class TypographySystemTests(unittest.TestCase):
         for token in (
             "--font-sans:",
             "--font-mono:",
-            "--type-display: clamp(38px, 5vw, 64px)",
+            "--type-display: clamp(34px, 4vw, 52px)",
             "--type-h1: clamp(36px, 4.5vw, 52px)",
             "--type-h2: clamp(28px, 3.5vw, 40px)",
             "--type-body: 1rem",
@@ -48,6 +56,25 @@ class TypographySystemTests(unittest.TestCase):
             self.assertIn(token, css)
         self.assertNotIn("@font-face", css)
         self.assertNotIn("url(", css)
+
+    def test_homepage_hero_uses_the_compact_display_scale(self):
+        css = (REPO_ROOT / "assets" / "typography.css").read_text(encoding="utf-8")
+        hero = declaration_block(css, ".a .hero h1")
+        self.assertIn("font-size: var(--type-display)", hero)
+        self.assertIn("letter-spacing: -0.025em", hero)
+        self.assertIn("font-size: 34px", css)
+
+    def test_free_modules_text_meets_the_readability_floor(self):
+        css = (REPO_ROOT / "assets" / "typography.css").read_text(encoding="utf-8")
+        expected = {
+            ".a .free-modules-tier-copy": "font-size: var(--type-body)",
+            ".a .free-modules-number strong": "font-size: 30px",
+            ".a .free-modules-number span": "font-size: 13px",
+            ".a .free-modules-categories span": "font-size: 13px",
+        }
+        for selector, declaration in expected.items():
+            with self.subTest(selector=selector):
+                self.assertIn(declaration, declaration_block(css, selector))
 
     def test_homepage_loads_typography_last(self):
         links = stylesheets(REPO_ROOT / "index.html")

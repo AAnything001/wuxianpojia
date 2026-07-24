@@ -12,7 +12,7 @@
 
 - Use only local system fonts; add no `@font-face`, remote font URL or third-party request.
 - Body text is 16px with 1.75 line height on desktop and mobile.
-- Homepage H1 uses `clamp(38px, 5vw, 64px)`; inner-page H1 uses `clamp(36px, 4.5vw, 52px)`.
+- Homepage H1 uses `clamp(34px, 4vw, 52px)` after user visual review; inner-page H1 uses `clamp(36px, 4.5vw, 52px)`.
 - H2 uses `clamp(28px, 3.5vw, 40px)`; H3 is 20px desktop and 18px mobile.
 - Navigation and buttons remain 14–15px; captions and disclaimers never fall below 12px.
 - Chinese heading tracking is no tighter than `-0.025em`; body tracking is zero.
@@ -75,7 +75,7 @@ class TypographySystemTests(unittest.TestCase):
         for token in (
             "--font-sans:",
             "--font-mono:",
-            "--type-display: clamp(38px, 5vw, 64px)",
+            "--type-display: clamp(34px, 4vw, 52px)",
             "--type-h1: clamp(36px, 4.5vw, 52px)",
             "--type-h2: clamp(28px, 3.5vw, 40px)",
             "--type-body: 1rem",
@@ -143,7 +143,7 @@ git commit -m "test: define site typography contract"
     "Noto Sans CJK SC", "Noto Sans SC", Arial, sans-serif;
   --font-mono: "Cascadia Code", "SFMono-Regular", Consolas,
     "Liberation Mono", monospace;
-  --type-display: clamp(38px, 5vw, 64px);
+  --type-display: clamp(34px, 4vw, 52px);
   --type-h1: clamp(36px, 4.5vw, 52px);
   --type-h2: clamp(28px, 3.5vw, 40px);
   --type-h3: 1.25rem;
@@ -285,6 +285,21 @@ h3,
   font-size: var(--type-body);
 }
 
+.a .free-modules-tier-copy {
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+}
+
+.a .free-modules-number strong {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.a .free-modules-number span,
+.a .free-modules-categories span {
+  font-size: 13px;
+}
+
 .article-link span,
 .related a {
   font-size: var(--type-small);
@@ -313,7 +328,11 @@ samp {
   }
 
   .a .hero h1 {
-    font-size: 38px;
+    font-size: 34px;
+  }
+
+  .a .free-modules-number strong {
+    font-size: 28px;
   }
 
   h1,
