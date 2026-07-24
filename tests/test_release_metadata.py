@@ -114,7 +114,7 @@ class ReleaseMetadataTests(unittest.TestCase):
             "https://pan.baidu.com/s/1wvuMX5b-ATgDE-hhCmbakg?pwd=uigu",
             "https://pan.quark.cn/s/fe6c168221f6",
             "https://wwbbc.lanzouv.com/iOjYk3yftdni",
-            "https://wwbbc.lanzouv.com/i9zwz3xnj43g",
+            "https://wwbbc.lanzouv.com/iBE7j3yh7dwh",
         }
         collector = HrefCollector()
         collector.feed(page)

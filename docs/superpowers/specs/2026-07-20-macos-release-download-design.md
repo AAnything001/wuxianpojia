@@ -6,7 +6,7 @@
 
 ## 发布信息
 
-- macOS 下载地址：`https://wwbbc.lanzouv.com/i9zwz3xnj43g`
+- macOS 下载地址：`https://wwbbc.lanzouv.com/iBE7j3yh7dwh`
 - 支持架构：Apple Silicon、Intel
 - Windows 下载地址保持不变：百度网盘、夸克网盘、蓝奏云
 - macOS 下载渠道当前仅提供蓝奏云
@@ -55,7 +55,7 @@
 
 - 首屏清楚说明同时支持 Windows 与 macOS。
 - macOS 卡片不再显示“还在路上”或“马上就来”。
-- macOS 专属按钮和弹窗内的 macOS 入口均指向 `https://wwbbc.lanzouv.com/i9zwz3xnj43g`。
+- macOS 专属按钮和弹窗内的 macOS 入口均指向 `https://wwbbc.lanzouv.com/iBE7j3yh7dwh`。
 - 下载弹窗同时展示 Windows 与 macOS，Windows 原有三个下载链接保持不变。
 - 结构化数据包含 macOS，更新日志包含 2026.07.20 发布记录。
 - 弹窗打开、关闭、Escape、焦点返回均正常，浏览器控制台无 JavaScript 错误。
