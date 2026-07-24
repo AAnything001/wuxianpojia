@@ -6,7 +6,7 @@
 
 **Architecture:** Add `assets/typography.css` as the final stylesheet on every production page. The shared file owns font stacks, type tokens and semantic overrides; existing page CSS continues to own color, spacing, layout and motion. Static Python contract tests verify the stylesheet, load order and full-page coverage before browser checks validate computed sizes and wrapping.
 
-**Tech Stack:** Static HTML/CSS, Python `unittest`, PowerShell, local `python -m http.server`, Playwright CLI for browser verification.
+**Tech Stack:** Static HTML/CSS, Python `unittest`, PowerShell and local `python -m http.server`.
 
 ## Global Constraints
 
@@ -480,15 +480,15 @@ git add knowledge
 git commit -m "feat: apply typography to knowledge pages"
 ```
 
-### Task 5: Full verification and local preview
+### Task 5: Full automated verification and local preview
 
 **Files:**
 - Verify: all production HTML/CSS and tests
-- Output: `output/playwright/typography/` screenshots only; do not commit output
+- No screenshots or visual-automation artifacts are created; the user performs final visual review.
 
 **Interfaces:**
 - Consumes: completed typography system and all page links.
-- Produces: passing automated tests, browser evidence and a live local preview at port 4173.
+- Produces: passing automated tests and a live isolated-worktree preview at port 4174.
 
 - [ ] **Step 1: Run all automated tests**
 
@@ -496,15 +496,21 @@ Run: `python -m unittest discover -s tests -v`
 
 Expected: all tests pass with zero failures and zero errors.
 
-- [ ] **Step 2: Start or reuse the local server**
+- [ ] **Step 2: Start the isolated local server**
 
-Run: `powershell -ExecutionPolicy Bypass -File .\run-prototype.ps1`
+Run from the typography worktree:
 
-Expected: `http://127.0.0.1:4173/index.html?variant=A` opens and the server listens on port 4173.
+```powershell
+Start-Process -FilePath python `
+  -ArgumentList '-m','http.server','4174','--directory',(Get-Location).Path `
+  -WindowStyle Hidden
+```
 
-- [ ] **Step 3: Verify six routes at desktop and mobile sizes**
+Expected: the server listens on port 4174 without changing the existing port 4173 preview.
 
-Routes:
+- [ ] **Step 3: Verify the preview endpoints and hand visual review to the user**
+
+Check these routes with `Invoke-WebRequest`:
 
 ```text
 /
@@ -515,9 +521,22 @@ Routes:
 /knowledge/codex-pojia-what-is
 ```
 
-Use Playwright CLI with 1440×900 and 390×844 viewports. For each route, confirm no horizontal overflow and record computed `body`, `h1`, `h2`, `.lead`, button and footer font sizes. Save representative homepage and article screenshots under `output/playwright/typography/`.
+```powershell
+$previewRoutes = @(
+  '/',
+  '/codex-pojia',
+  '/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%88',
+  '/user-notice',
+  '/knowledge/',
+  '/knowledge/codex-pojia-what-is'
+)
+foreach ($route in $previewRoutes) {
+  $response = Invoke-WebRequest -Uri ("http://127.0.0.1:4174" + $route) -UseBasicParsing
+  if ($response.StatusCode -ne 200) { throw "Preview failed: $route" }
+}
+```
 
-Expected: body is 16px; homepage H1 is 38–64px depending on viewport; inner-page H1 is 36–52px; H2 is 28–40px; explanatory text is at least 12px; no route has horizontal scrolling.
+Expected: all six routes return HTTP 200. Give the user `http://127.0.0.1:4174/?variant=A` for their own desktop/mobile visual inspection; do not take screenshots.
 
 - [ ] **Step 4: Inspect the final repository delta**
 
