@@ -151,6 +151,24 @@ h3,
   line-height: var(--leading-body);
 }
 
+.a .free-modules-tier-label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.a .free-modules-badge {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.a .free-modules-tier.is-free h3 {
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
 .a .free-modules-number strong {
   font-size: 30px;
   line-height: 1.15;
@@ -162,9 +180,14 @@ h3,
 }
 
 .a .free-modules-categories span {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.4;
+}
+
+.a .free-modules-clients {
+  font-size: 14px;
+  line-height: 1.65;
 }
 
 .article-link span,

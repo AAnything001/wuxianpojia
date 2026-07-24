@@ -67,10 +67,14 @@ class TypographySystemTests(unittest.TestCase):
     def test_free_modules_text_meets_the_readability_floor(self):
         css = (REPO_ROOT / "assets" / "typography.css").read_text(encoding="utf-8")
         expected = {
+            ".a .free-modules-tier-label": "font-size: 14px",
+            ".a .free-modules-badge": "font-size: 12px",
+            ".a .free-modules-tier.is-free h3": "font-size: 28px",
             ".a .free-modules-tier-copy": "font-size: var(--type-body)",
             ".a .free-modules-number strong": "font-size: 30px",
             ".a .free-modules-number span": "font-size: 13px",
-            ".a .free-modules-categories span": "font-size: 13px",
+            ".a .free-modules-categories span": "font-size: 14px",
+            ".a .free-modules-clients": "font-size: 14px",
         }
         for selector, declaration in expected.items():
             with self.subTest(selector=selector):
