@@ -86,6 +86,12 @@ class ReleaseMetadataTests(unittest.TestCase):
             headers,
         )
 
+    def test_signed_release_files_are_checked_out_byte_for_byte(self):
+        attributes = (REPO_ROOT / ".gitattributes").read_text(encoding="utf-8")
+
+        self.assertIn("/downloads/wujin/stable/latest.json -text", attributes)
+        self.assertIn("/downloads/wujin/stable/latest.json.sig -text", attributes)
+
     def test_update_log_highlights_the_1_30_3_release_and_preserves_history(self):
         page = INDEX.read_text(encoding="utf-8")
 
