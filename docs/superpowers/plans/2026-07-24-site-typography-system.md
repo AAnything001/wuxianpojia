@@ -514,21 +514,21 @@ Check these routes with `Invoke-WebRequest`:
 
 ```text
 /
-/codex-pojia
-/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%88
-/user-notice
+/codex-pojia.html
+/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%88.html
+/user-notice.html
 /knowledge/
-/knowledge/codex-pojia-what-is
+/knowledge/codex-pojia-what-is.html
 ```
 
 ```powershell
 $previewRoutes = @(
   '/',
-  '/codex-pojia',
-  '/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%88',
-  '/user-notice',
+  '/codex-pojia.html',
+  '/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%88.html',
+  '/user-notice.html',
   '/knowledge/',
-  '/knowledge/codex-pojia-what-is'
+  '/knowledge/codex-pojia-what-is.html'
 )
 foreach ($route in $previewRoutes) {
   $response = Invoke-WebRequest -Uri ("http://127.0.0.1:4174" + $route) -UseBasicParsing
