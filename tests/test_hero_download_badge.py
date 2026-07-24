@@ -40,7 +40,7 @@ class HeroDownloadBadgeTests(unittest.TestCase):
             1,
             self.html.count(
                 "heroUpdateBadge.setAttribute('aria-label',"
-                "'Windows v1.30.1 已发布')"
+                "'Windows v1.30.3 已发布')"
             ),
         )
         self.assertEqual(1, self.html.count("heroUpdateBadge.textContent='新版本'"))
