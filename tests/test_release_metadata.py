@@ -108,12 +108,12 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("更新 5.5 破甲方案，新增支持 5.6 最新方案；新增免费模块，进一步增强你的 AI。", page)
         self.assertNotIn("开发中（尚未提供下载包）", page)
 
-    def test_existing_netdisk_urls_are_unchanged(self):
+    def test_download_urls_match_current_release_channels(self):
         page = INDEX.read_text(encoding="utf-8")
         expected_urls = {
             "https://pan.baidu.com/s/1wvuMX5b-ATgDE-hhCmbakg?pwd=uigu",
             "https://pan.quark.cn/s/fe6c168221f6",
-            "https://wwbbc.lanzouv.com/i00e63y89uvg",
+            "https://wwbbc.lanzouv.com/iOjYk3yftdni",
             "https://wwbbc.lanzouv.com/i9zwz3xnj43g",
         }
         collector = HrefCollector()
