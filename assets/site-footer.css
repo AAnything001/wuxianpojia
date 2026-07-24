@@ -11,9 +11,9 @@ footer.site-footer {
   border-top: 1px solid var(--footer-line);
   background: var(--footer-bg);
   color: var(--footer-muted);
-  font-family: Inter, "Segoe UI", "Microsoft YaHei", sans-serif;
-  font-size: 13px;
-  line-height: 1.65;
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
   text-align: left;
 }
 
